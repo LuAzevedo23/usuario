@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/usuario")
+@RequestMapping("/usuarios")
 @RequiredArgsConstructor
 public class UsuarioController {
 
@@ -21,3 +21,5 @@ public class UsuarioController {
         return ResponseEntity.ok(usuarioService.salvaUsuario(usuarioDtO));
     }
 }
+
+
