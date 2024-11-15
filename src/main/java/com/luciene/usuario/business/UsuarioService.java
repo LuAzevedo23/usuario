@@ -44,6 +44,7 @@ public class UsuarioService {
     }
 
     public boolean verificaEmailExistente(String email) {
+
         return usuarioRepository.existsByEmail(email);
     }
 
@@ -54,6 +55,7 @@ public class UsuarioService {
     }
 
     public void deletaUsuarioPorEmail(String email) {
+
         usuarioRepository.deleteByEmail(email);
     }
 
