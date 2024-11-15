@@ -1,4 +1,4 @@
-package com.luciene.usuario.service.dto;
+package com.luciene.usuario.business.dto;
 
 import lombok.*;
 
@@ -11,4 +11,5 @@ public class TelefoneDTO {
 
     private String numero;
     private String ddd;
+
 }

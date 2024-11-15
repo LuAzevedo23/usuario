@@ -21,4 +21,6 @@ public class Telefone {
 
    @Column(name = "ddd", length = 3)
     private String ddd;
+
+
 }

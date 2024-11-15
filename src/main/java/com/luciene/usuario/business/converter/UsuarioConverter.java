@@ -1,11 +1,11 @@
-package com.luciene.usuario.service.converter;
+package com.luciene.usuario.business.converter;
 
 import com.luciene.usuario.infrastructure.entity.Endereco;
 import com.luciene.usuario.infrastructure.entity.Telefone;
 import com.luciene.usuario.infrastructure.entity.Usuario;
-import com.luciene.usuario.service.dto.EnderecoDTO;
-import com.luciene.usuario.service.dto.TelefoneDTO;
-import com.luciene.usuario.service.dto.UsuarioDTO;
+import com.luciene.usuario.business.dto.EnderecoDTO;
+import com.luciene.usuario.business.dto.TelefoneDTO;
+import com.luciene.usuario.business.dto.UsuarioDTO;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -39,14 +39,12 @@ public class UsuarioConverter {
                 .cidade(enderecoDTO.getCidade())
                 .complemento(enderecoDTO.getComplemento())
                 .cep(enderecoDTO.getCep())
-                .Estado(enderecoDTO.getEstado())
+                .estado(enderecoDTO.getEstado())
                 .build();
-
     }
 
     public List<Telefone> paraListaTelefones(List<TelefoneDTO> telefonesDTOS) {
         return telefonesDTOS.stream().map(this::paraTelefone).toList();
-
     }
 
     public Telefone paraTelefone(TelefoneDTO telefoneDTO) {
@@ -56,45 +54,43 @@ public class UsuarioConverter {
                 .build();
     }
 
-    public UsuarioDTO paraUsuarioDTO(Usuario usuarioDTO) {
+    public UsuarioDTO paraUsuarioDTO(Usuario usuario) {
         return UsuarioDTO.builder()
-                .nome(usuarioDTO.getNome())
-                .email(usuarioDTO.getEmail())
-                .senha(usuarioDTO.getSenha())
-                .enderecos(paraListaEnderecoDTO(usuarioDTO.getEnderecos()))
-                .telefones(paraListaTelefonesDTO(usuarioDTO.getTelefones()))
+                .nome(usuario.getNome())
+                .email(usuario.getEmail())
+                .senha(usuario.getSenha())
+                .enderecos(paraListaEnderecoDTO(usuario.getEnderecos()))
+                .telefones(paraListaTelefonesDTO(usuario.getTelefones()))
                 .build();
     }
 
-    public List<EnderecoDTO> paraListaEnderecoDTO(List<Endereco> enderecoDTOS) {
-        List<EnderecoDTO> enderecos = new ArrayList<>();
-        for (Endereco enderecoDTO : enderecoDTOS) {
-            enderecos.add(paraEnderecoDTO(enderecoDTO));
+    public List<EnderecoDTO> paraListaEnderecoDTO(List<Endereco> enderecos) {
+        List<EnderecoDTO> enderecoDTOs = new ArrayList<>();
+        for (Endereco endereco : enderecos) {
+            enderecoDTOs.add(paraEnderecoDTO(endereco));
         }
-        return enderecos;
+        return enderecoDTOs;
     }
 
-    public EnderecoDTO paraEnderecoDTO(Endereco enderecoDTO) {
+    public EnderecoDTO paraEnderecoDTO(Endereco endereco) {
         return EnderecoDTO.builder()
-                .rua(enderecoDTO.getRua())
-                .numero(enderecoDTO.getNumero())
-                .cidade(enderecoDTO.getCidade())
-                .complemento(enderecoDTO.getComplemento())
-                .cep(enderecoDTO.getCep())
-                .Estado(enderecoDTO.getEstado())
+                .rua(endereco.getRua())
+                .numero(endereco.getNumero())
+                .cidade(endereco.getCidade())
+                .complemento(endereco.getComplemento())
+                .cep(endereco.getCep())
+                .estado(endereco.getEstado()) // Correção aqui
                 .build();
-
     }
 
-    public List<TelefoneDTO> paraListaTelefonesDTO(List<Telefone> telefonesDTOS) {
-        return telefonesDTOS.stream().map(this::paraTelefoneDTO).toList();
-
+    public List<TelefoneDTO> paraListaTelefonesDTO(List<Telefone> telefones) {
+        return telefones.stream().map(this::paraTelefoneDTO).toList();
     }
 
-    public TelefoneDTO paraTelefoneDTO(Telefone telefoneDTO) {
+    public TelefoneDTO paraTelefoneDTO(Telefone telefone) {
         return TelefoneDTO.builder()
-                .numero(telefoneDTO.getNumero())
-                .ddd(telefoneDTO.getDdd())
+                .numero(telefone.getNumero())
+                .ddd(telefone.getDdd())
                 .build();
     }
 }
