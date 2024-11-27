@@ -21,6 +21,12 @@ public class UsuarioController {
     private final AuthenticationManager authenticationManager;
     private final JwtUtil jwtUtil;
 
+    @GetMapping
+    public UsuarioDTO buscarUsuarioPorEmail(@RequestParam String email) {
+        // Chama o serviço para buscar o usuário pelo e-mail
+        return usuarioService.buscarUsuarioPorEmail(email);
+    }
+
     @PostMapping
     public ResponseEntity<UsuarioDTO> salvaUsuario(@RequestBody UsuarioDTO usuarioDtO) {
         return ResponseEntity.ok(usuarioService.salvaUsuario(usuarioDtO));
