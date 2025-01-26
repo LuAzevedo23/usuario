@@ -8,34 +8,33 @@ import org.springframework.security.core.userdetails.UserDetails;
 import java.util.Collection;
 import java.util.List;
 
-@Getter
-@Setter
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
 @Builder
-@Table(name="usuario")
+@Table(name = "usuario")
 public class Usuario implements UserDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name="nome", length = 100)
+    @Column(name = "nome", length = 100)
     private String nome;
 
-    @Column(name="email", length = 100)
+    @Column(name = "email", length = 100)
     private String email;
 
-    @Column(name="senha")
+    @Column(name = "senha")
     private String senha;
 
     @OneToMany
-    @JoinColumn(name="usuario_id", referencedColumnName = "id")
+    @JoinColumn(name = "usuario_id", referencedColumnName = "id")
     private List<Endereco> enderecos;
 
     @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name="usuario_id", referencedColumnName = "id")
+    @JoinColumn(name = "usuario_id", referencedColumnName = "id")
     private List<Telefone> telefones;
 
     @Override
@@ -45,11 +44,31 @@ public class Usuario implements UserDetails {
 
     @Override
     public String getPassword() {
-        return "senha";
+        return senha;
     }
 
     @Override
     public String getUsername() {
-        return "email";
+        return email;
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return true;
     }
 }

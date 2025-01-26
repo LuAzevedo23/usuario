@@ -1,4 +1,4 @@
-package com.luciene.usuario.service.dto;
+package com.luciene.usuario.business.dto;
 
 import lombok.*;
 
@@ -9,11 +9,12 @@ import lombok.*;
 @Builder
 public class EnderecoDTO {
 
+    private Long id;
     private String rua;
-    private Long numero;
+    private String numero;
     private String complemento;
     private String cidade;
-    private String Estado;
+    private String estado;
     private String cep;
 
 }
