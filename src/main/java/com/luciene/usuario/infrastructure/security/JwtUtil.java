@@ -9,6 +9,8 @@ import javax.crypto.SecretKey;
 import java.util.Base64;
 import java.util.Date;
 
+import static io.jsonwebtoken.Jwts.builder;
+
 @Service
 public class JwtUtil {
 
@@ -23,7 +25,7 @@ public class JwtUtil {
     }
     // Gera um token JWT com o nome de usuário e validade de 1 hora
     public String generateToken(String username) {
-        return Jwts.builder() // Inicia o processo de construção do token JWT
+        return builder() // Inicia o processo de construção do token JWT
                 .subject(username) // Define o nome de usuário como o "subject" do token
                 .issuedAt(new Date()) // Define a data e hora atuais como o momento de emissão do token
                 .expiration(new Date(System.currentTimeMillis() + 1000 * 60 * 60)) // Define a data e hora de expiração do token para 1 hora a partir da emissão
@@ -33,11 +35,12 @@ public class JwtUtil {
 
     // Extrai as claims do token JWT (informações adicionais do token)
     private Claims extractClaims(String token) {
-        return Jwts.parser() // Inicia o processo de parsing do token JWT
+       return Jwts.parser() // Inicia o processo de parsing do token JWT
                 .verifyWith(getSigningKey()) // Configura o parser para verificar a assinatura do token usando a chave de assinatura fornecida
                 .build() // Conclui a configuração do parser
                 .parseSignedClaims(token) // Faz o parsing do token e extrai as claims assinadas
                 .getPayload(); // Obtém o payload (corpo) do token, que contém as claims
+
     }
 
 

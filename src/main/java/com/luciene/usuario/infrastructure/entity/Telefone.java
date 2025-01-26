@@ -1,16 +1,14 @@
 package com.luciene.usuario.infrastructure.entity;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
+@Builder
 @Table(name="telefone")
 public class Telefone {
 
@@ -23,4 +21,7 @@ public class Telefone {
 
    @Column(name = "ddd", length = 3)
     private String ddd;
+
+    @Column(name = "usuario_id")
+    private Long usuario_id;
 }

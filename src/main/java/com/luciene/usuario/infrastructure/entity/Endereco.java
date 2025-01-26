@@ -1,16 +1,14 @@
 package com.luciene.usuario.infrastructure.entity;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
+@Builder
 @Table(name="endereco")
 public class Endereco {
 
@@ -31,9 +29,14 @@ public class Endereco {
     private String cidade;
 
     @Column(name="estado", length = 2)
-    private String Estado;
+    private String estado;
 
     @Column(name="cep",length = 9)
     private String cep;
+
+    @Column(name = "usuario_id")
+    private Long usuario_id;
+
+
 
 }
